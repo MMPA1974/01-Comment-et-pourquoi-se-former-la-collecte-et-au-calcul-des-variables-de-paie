@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>01 Comment et pourquoi se former à la collecte et au calcul des variables de paie</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Styles de base pour le corps de la page */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #dbeafe; /* Fond bleu très clair (Tailwind blue-50) */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; /* Hauteur minimale de la fenêtre */
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        /* Conteneur principal du quiz */
+        .quiz-container {
+            background-color: #ffffff; /* Fond blanc */
+            border-radius: 15px; /* Coins arrondis */
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); /* Ombre douce */
+            padding: 30px;
+            max-width: 800px; /* Largeur maximale pour la lisibilité */
+            width: 100%; /* Pleine largeur sur petits écrans */
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 20px; /* Espacement entre les éléments */
+        }
+        /* Style du texte de la question */
+        .question-text {
+            font-size: 1.5rem; /* Taille de police plus grande */
+            font-weight: 600; /* Semi-gras */
+            color: #333; /* Texte gris foncé */
+            margin-bottom: 20px;
+        }
+        /* Style des options de réponse individuelles */
+        .answer-option {
+            background-color: #e2e8f0; /* Gris-bleu clair */
+            border-radius: 10px; /* Coins arrondis */
+            padding: 15px 20px;
+            margin-bottom: 10px;
+            cursor: pointer; /* Indique que l'élément est clickable */
+            transition: background-color 0.3s ease, transform 0.2s ease; /* Transitions douces */
+            text-align: left;
+            font-size: 1.1rem;
+            color: #4a5568; /* Texte gris moyen */
+            border: 2px solid transparent; /* Bordure transparente pour la sélection */
+        }
+        /* Effet au survol des options de réponse */
+        .answer-option:hover {
+            background-color: #93c5fd; /* Bleu plus doux (Tailwind blue-300) au survol */
+            transform: translateY(-2px); /* Léger effet de soulèvement */
+        }
+        /* Style de l'option de réponse correcte */
+        .answer-option.correct {
+            background-color: #bfdbfe; /* Bleu-200 */
+            border-color: #3b82f6; /* Bleu-500 */
+        }
+        /* Style de l'option de réponse incorrecte */
+        .answer-option.incorrect {
+            background-color: #fce7f6; /* Pink-100 (plus clair) */
+            border-color: #ec4899; /* Pink-500 (plus fuchsia) */
+        }
+        /* Style de l'option de réponse sélectionnée par l'utilisateur */
+        .answer-option.selected {
+            background-color: #fffef0; /* Jaune-100 */
+            border-color: #eab308; /* Jaune-500 */
+        }
+        /* Style du texte de la justification (rationale) */
+        .rationale {
+            font-size: 0.95rem;
+            margin-top: 5px;
+            padding: 10px;
+            border-radius: 8px;
+            text-align: left;
+            color: #4a5568;
+            background-color: #f0f2f5;
+            border-left: 4px solid #60a5fa; /* Bordure gauche bleue-400 */
+        }
+        /* Style spécifique de la justification pour les réponses correctes */
+        .rationale.correct-rationale {
+            border-left-color: #3b82f6; /* Bleu-500 */
+            background-color: #e0f2fe; /* Bleu-100 */
+        }
+        /* Style spécifique de la justification pour les réponses incorrectes */
+        .rationale.incorrect-rationale {
+            border-left-color: #ec4899; /* Pink-500 (plus fuchsia) */
+            background-color: #fce7f6; /* Pink-100 (plus clair) */
+        }
+        /* Style spécifique de la justification pour la réponse sélectionnée par l'utilisateur */
+        .rationale.selected-rationale {
+            border-left-color: #eab308; /* Jaune-500 */
+            background-color: #fffef0; /* Jaune-100 */
+        }
+        /* Style général des boutons */
+        .button {
+            background-color: #1d4ed8; /* Fond bleu profond (Tailwind blue-700) */
+            color: white; /* Texte blanc */
+            padding: 12px 25px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: background-color 0.3s ease, transform 0.2s ease; /* Transitions douces */
+            border: none;
+            box-shadow: 0 4px 10px rgba(66, 153, 225, 0.3); /* Ombre douce */
+        }
+        /* Effet au survol des boutons */
+        .button:hover {
+            background-color: #1e40af; /* Bleu plus foncé au survol (Tailwind blue-800) */
+            transform: translateY(-2px); /* Léger effet de soulèvement */
+        }
+        /* État désactivé des boutons */
+        .button:disabled {
+            background-color: #a0aec0; /* Grisé lorsque désactivé */
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+        /* Conteneur de la barre de progression */
+        .progress-bar {
+            width: 100%;
+            height: 20px; /* Plus épais */
+            background-color: #e2e8f0;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 5px; /* Moins de marge pour rapprocher du score */
+            display: flex; /* Utiliser flexbox pour les segments */
+            font-weight: bold; /* Texte en gras dans la barre */
+            color: white; /* Texte blanc par default pour les sections colorées */
+            font-size: 0.9em; /* Taille du texte dans la barre */
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5); /* Ombre pour la lisibilité */
+        }
+        /* Sections de la barre de progression et du graphique final */
+        .progress-section {
+            height: 100%;
+            display: flex; /* Pour centrer le texte */
+            align-items: center;
+            justify-content: center;
+            transition: width 0.3s ease-in-out; /* Transition de largeur douce */
+            box-sizing: border-box; /* Pour inclure padding/border dans la largeur */
+        }
+        .correct-section { background-color: #1d4ed8; } /* Bleu profond (Tailwind blue-700) */
+        .incorrect-section { background-color: #ec4899; } /* Fuchsia */
+        .unanswered-section { background-color: #93c5fd; color: #4a5568; text-shadow: none; } /* Bleu doux (Tailwind blue-300), texte foncé */
+        /* Style de l'affichage du score final */
+        .score-display {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #2d3748; /* Texte gris foncé */
+            margin-bottom: 20px;
+        }
+        /* Style du texte de l'indice */
+        .hint-text {
+            font-style: italic;
+            color: #718096; /* Texte gris atténué */
+            margin-top: 10px;
+            font-size: 0.9rem;
+        }
+        .live-score-display {
+            font-size: 1.1rem; /* Plus grand */
+            font-weight: 600; /* Plus gras */
+            color: #333;
+            margin-top: 0px; /* Moins de marge pour rapprocher de la barre */
+            margin-bottom: 10px;
+            text-align: center; /* Centrer le texte */
+        }
+
+        /* Style spécifique pour la barre de résultats finaux */
+        .final-results-chart-container {
+            height: 30px; /* Plus épais pour le graphique final */
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        /* Pour le graphique final, on ne veut qu'une seule section pour le correct */
+        .final-results-chart-container .incorrect-section,
+        .final-results-chart-container .unanswered-section {
+            display: none; /* Cacher ces sections dans le graphique final */
+        }
+        .final-results-chart-container .correct-section {
+            width: 100% !important; /* Force la section correcte à prendre toute la largeur disponible */
+            justify-content: center; /* Centrer le texte */
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h1 class="text-3xl font-bold text-gray-800 mb-6">01 Comment et pourquoi se former à la collecte et au calcul des variables de paie</h1>
+        <div id="liveScoreDisplay" class="live-score-display"></div>
+        <div class="progress-bar" id="progressBar">
+            <!-- Sections de progression seront insérées ici par JavaScript -->
+            <div class="progress-section correct-section" id="correctProgress"></div>
+            <div class="progress-section incorrect-section" id="incorrectProgress"></div>
+            <div class="progress-section unanswered-section" id="unansweredProgress"></div>
+        </div>
+        <div id="quiz" class="flex flex-col gap-4">
+            <!-- La question et les réponses seront chargées ici par JavaScript -->
+        </div>
+        <div id="navigation" class="flex justify-between mt-6">
+            <button id="prevButton" class="button" disabled>Précédent</button>
+            <button id="nextButton" class="button">Suivant</button>
+        </div>
+        <button id="restartButton" class="button mt-6 hidden">Recommencer le Quiz</button>
+    </div>
+
+    <script>
+        // Données du quiz
+        const quizData = {
+            "questions": [
+                // Questions from 01 Comment et pourquoi se former à la collecte et au calcul des variables de paie
+                {
+                    "question": "Quel est l'objectif principal de la formation à la collecte et au calcul des variables de paie pour un futur gestionnaire ?",
+                    "hint": "Pensez à la finalité de cette activité pour la rémunération des salariés.",
+                    "answerOptions": [
+                        {
+                            "text": "✨ Apprendre à réduire le temps de travail des salariés.",
+                            "rationale": "❌ C'est incorrect. L'objectif principal est d'assurer une rémunération juste et conforme, pas de réduire le temps de travail. 💡",
+                            "isCorrect": false
+                        },
+                        {
+                            "text": "✨ Assurer une rémunération juste et conforme au travail effectué par les salariés.",
+                            "rationale": "✅ C'est la bonne réponse. La formation à la collecte et au calcul des variables de paie est essentielle pour garantir que les salariés soient payés correctement et conformément au travail qu'ils ont effectué, évitant ainsi les erreurs et les litiges. 📘💰",
+                            "isCorrect": true
+                        },
+                        {
+                            "text": "✨ Maîtriser uniquement les aspects fiscaux de la paie.",
+                            "rationale": "❌ C'est incorrect. La formation couvre un champ beaucoup plus large que les seuls aspects fiscaux, incluant les variables sociales et contractuelles. 📊",
+                            "isCorrect": false
+                        },
+                        {
+                            "text": "✨ Automatiser entièrement le processus de paie sans intervention humaine.",
+                            "rationale": "❌ C'est incorrect. Bien que les outils digitaux aident, la rigueur et l'intervention humaine restent cruciales pour la collecte et le contrôle des variables. 🤖",
+                            "isCorrect": false
+                        }
+                    ]
+                },
+                {
+                    "question": "Vrai ou Faux : La gestion des variables de paie implique uniquement des compétences techniques en calcul.",
+                    "hint": "Pensez à l'aspect relationnel et humain de la fonction.",
+                    "answerOptions": [
+                        {
+                            "text": "✨ Vrai.",
+                            "rationale": "❌ C'est incorrect. Le document souligne que la gestion des variables de paie demande à la fois de la rigueur technique et des qualités humaines, car le gestionnaire est un interlocuteur privilégié des salariés. 🤝",
+                            "isCorrect": false
+                        },
+                        {
+                            "text": "✨ Faux.",
+                            "rationale": "✅ C'est la bonne réponse. La gestion des variables de paie ne se limite pas aux compétences techniques. Elle requiert également des qualités humaines et relationnelles, car le gestionnaire de paie est un interlocuteur clé pour les salariés et doit faire preuve de rigueur et de tact. 💡",
+                            "isCorrect": true
+                        }
+                    ]
+                },
+                {
+                    "question": "Selon le document, quelle est l'une des tâches fondamentales qu'un gestionnaire de paie doit maîtriser pour le calcul des variables ?",
+                    "hint": "Pensez à la première étape du processus de paie.",
+                    "answerOptions": [
+                        {
+                            "text": "✨ La négociation des salaires des nouveaux employés.",
+                            "rationale": "❌ C'est une tâche des RH, mais pas directement du calcul des variables de paie. 💼",
+                            "isCorrect": false
+                        },
+                        {
+                            "text": "✨ L'identification des outils et données comptables nécessaires.",
+                            "rationale": "✅ C'est la bonne réponse. L'identification des outils et données comptables est une compétence fondamentale à maîtriser pour la collecte et le calcul des variables de paie, assurant ainsi la précision des données. 📊",
+                            "isCorrect": true
+                        },
+                        {
+                            "text": "✨ La gestion des litiges avec les organismes sociaux.",
+                            "rationale": "❌ C'est une tâche qui peut découler d'erreurs, mais pas une compétence fondamentale de *calcul* des variables. ⚖️",
+                            "isCorrect": false
+                        },
+                        {
+                            "text": "✨ La création de nouveaux régimes de mutuelle d'entreprise.",
+                            "rationale": "❌ C'est une tâche qui relève de la politique RH et non du calcul des variables. 🏥",
+                            "isCorrect": false
+                        }
+                    ]
+                },
+                {
+                    "question": "Pourquoi est-il crucial pour un gestionnaire de paie de bien recueillir les informations préalables à la paie ?",
+                    "hint": "Pensez aux conséquences d'informations incorrectes.",
+                    "answerOptions": [
+                        {
+                            "text": "✨ Pour augmenter le salaire des employés.",
+                            "rationale": "❌ C'est incorrect. Le but est la justesse de la paie, pas son augmentation systématique. 💰",
+                            "isCorrect": false
+                        },
+                        {
+                            "text": "✨ Pour éviter le stress inutile et les risques d'erreurs ou de manquements.",
+                            "rationale": "✅ C'est la bonne réponse. Un bon recueil des informations préalables est fondamental pour éviter le stress inutile, les risques d'erreurs ou de manquements, et pour garantir la conformité et la qualité du processus de paie. 🤯🚫",
+                            "isCorrect": true
+                        },
+                        {
+                            "text": "✨ Pour réduire le nombre d'heures travaillées.",
+                            "rationale": "❌ C'est incorrect. La collecte des variables est liée à la rémunération du temps de travail effectif, pas à sa réduction. ⏰",
+                            "isCorrect": false
+                        },
+                        {
+                            "text": "✨ Pour automatiser toutes les tâches de la paie.",
+                            "rationale": "❌ C'est incorrect. Bien que les outils digitaux aident, la rigueur et l'intervention humaine restent cruciales pour la collecte et le contrôle des variables. 🤖",
+                            "isCorrect": false
+                        }
+                    ]
+                },
+                {
+                    "question": "Vrai ou Faux : Les outils digitaux ont rendu la compréhension des obligations et des variables recueillies obsolète pour le gestionnaire de paie.",
+                    "hint": "Les outils facilitent, mais ne remplacent pas toujours l'expertise.",
+                    "answerOptions": [
+                        {
+                            "text": "✨ Vrai.",
+                            "rationale": "❌ C'est incorrect. Le document indique que, malgré l'existence de nombreux outils digitaux, il est indispensable d'avoir une bonne compréhension des obligations et des variables recueillies pour une bonne gestion de laie. Les outils sont des aides, pas des substituts à la connaissance. 💡",
+                            "isCorrect": false
+                        },
+                        {
+                            "text": "✨ Faux.",
+                            "rationale": "✅ C'est la bonne réponse. Le document insiste sur le fait qu'il est fondamental d'avoir une bonne compréhension des obligations et des variables recueillies, même avec l'aide des outils digitaux. Ces outils facilitent la tâche, mais ne remplacent pas l'expertise du gestionnaire. 🧠",
+                            "isCorrect": true
+                        }
+                    ]
+                },
+                {
+                    "question": "Quel est le rôle principal d'un gestionnaire de paie dans une entreprise, au-delà du simple calcul ?",
+                    "hint": "Pensez à sa position au sein de la mission RH.",
+                    "answerOptions": [
+                        {
+                            "text": "✨ Gérer les recrutements et les départs de salariés.",
+                            "rationale": "❌ C'est une tâche des RH, mais pas le rôle principal du gestionnaire de paie. 💼",
+                            "isCorrect": false
+                        },
+                        {
+                            "text": "✨ Contribuer à la continuité des rémunérations et alerter sur d'éventuelles situations à risque.",
+                            "rationale": "✅ C'est la bonne réponse. Le gestionnaire de paie participe à la mission RH de l'entreprise en contribuant à la continuité des rémunérations et en alertant sur d'éventuelles situations à risque, assurant ainsi la conformité et la qualité du processus. 🛡️",
+                            "isCorrect": true
+                        },
+                        {
+                            "text": "✨ Définir la politique de rémunération de l'entreprise.",
+                            "rationale": "❌ C'est une tâche de la direction ou des RH, pas du gestionnaire de paie. 💰",
+                            "isCorrect": false
+                        },
+                        {
+                            "text": "✨ Organiser les formations professionnelles des salariés.",
+                            "rationale": "❌ C'est une tâche des RH ou de la direction, non du gestionnaire de paie. 🎓",
+                            "isCorrect": false
+                        }
+                    ]
+                },
+                {
+                    "question": "Vrai ou Faux : La pédagogie de la législation applicable est une étape secondaire dans la réalisation des calculs de paie.",
+                    "hint": "La compréhension de la loi est essentielle pour la justesse.",
+                    "answerOptions": [
+                        {
+                            "text": "✨ Vrai.",
+                            "rationale": "❌ C'est incorrect. Le document insiste sur le fait que la pédagogie de la législation applicable est une étape cruciale pour garantir la justesse des calculs de paie. 🚫",
+                            "isCorrect": false
+                        },
+                        {
+                            "text": "✨ Faux.",
+                            "rationale": "✅ C'est la bonne réponse. La pédagogie de la législation applicable est une étape fondamentale et non secondaire pour la réalisation des calculs de paie, assurant leur conformité et leur exactitude. 📘",
+                            "isCorrect": true
+                        }
+                    ]
+                },
+                {
+                    "question": "Quelles sont les trois questions essentielles auxquelles une bonne pratique de la collecte et du calcul des variables de paie doit permettre de répondre ?",
+                    "hint": "Pensez à la conformité, à la spécificité et à l'intégration.",
+                    "answerOptions": [
+                        {
+                            "text": "✨ Comment réduire les coûts de personnel, comment augmenter les profits, et comment gérer les conflits sociaux ?",
+                            "rationale": "❌ Ces questions sont liées à la gestion d'entreprise mais ne sont pas celles spécifiques à la collecte et au calcul des variables de paie mentionnées. 💰",
+                            "isCorrect": false
+                        },
+                        {
+                            "text": "✨ Les variables transmises sont-elles correctement intégrées et analysées ? Quelles dispositions sont applicables selon les spécificités du salarié ? Les documents et justificatifs sont-ils conformes et réglementaires ?",
+                            "rationale": "✅ C'est la bonne réponse. Le document indique que ces trois questions sont au cœur d'une bonne pratique de la collecte et du calcul des variables de paie, assurant la conformité et la justesse de la rémunération. 📊📜",
+                            "isCorrect": true
+                        },
+                        {
+                            "text": "✨ Comment recruter de nouveaux talents, comment former les équipes, et comment évaluer la performance ?",
+                            "rationale": "❌ Ces questions sont liées aux RH, mais pas directement à la collecte et au calcul des variables de paie. 🧑‍💼",
+                            "isCorrect": false
+                        },
+                        {
+                            "text": "✨ Quelle est la meilleure méthode de paiement, quel est le délai de prescription, et comment gérer les acomptes ?",
+                            "rationale": "❌ Ces questions sont spécifiques au règlement du salaire, mais pas à la collecte et au calcul des variables de paie dans leur ensemble. 💡",
+                            "isCorrect": false
+                        }
+                    ]
+                },
+                {
+                    "question": "Vrai ou Faux : Un gestionnaire de paie n'a pas besoin de connaître les spécificités contractuelles de chaque salarié pour calculer correctement la paie.",
+                    "hint": "Chaque contrat peut avoir des clauses particulières.",
+                    "answerOptions": [
+                        {
+                            "text": "✨ Vrai.",
+                            "rationale": "❌ C'est incorrect. Le document insiste sur l'importance de la 'spécificité professionnelle et contractuelle' pour correctement créer le bulletin de paie. 🚫",
+                            "isCorrect": false
+                        },
+                        {
+                            "text": "✨ Faux.",
+                            "rationale": "✅ C'est la bonne réponse. Le gestionnaire de paie doit impérativement connaître les spécificités contractuelles de chaque salarié (durée du travail, primes, etc.) pour calculer une paie juste et conforme. 📜",
+                            "isCorrect": true
+                        }
+                    ]
+                },
+                {
+                    "question": "Quel est le risque pour un gestionnaire de paie qui ne recueille pas correctement les informations préalables, selon le document ?",
+                    "hint": "Pensez aux conséquences sur la gestion de la paie et le bien-être.",
+                    "answerOptions": [
+                        {
+                            "text": "✨ Une augmentation de son propre salaire.",
+                            "rationale": "❌ C'est une conséquence peu probable d'une mauvaise maîtrise générale des compétences. 💰",
+                            "isCorrect": false
+                        },
+                        {
+                            "text": "✨ Un stress inutile et des risques d'erreurs ou de manquements dans les bulletins.",
+                            "rationale": "✅ C'est la bonne réponse. Un mauvais recueil d'informations peut entraîner un stress inutile pour le gestionnaire de paie et des risques élevés d'erreurs ou de manquements dans les bulletins, ce qui peut avoir des conséquences financières et légales pour l'entreprise. 🤯",
+                            "isCorrect": true
+                        },
+                        {
+                            "text": "✨ Une réduction de la charge de travail.",
+                            "rationale": "❌ C'est incorrect. Au contraire, les erreurs peuvent augmenter la charge de travail (corrections, litiges). ⏰",
+                            "isCorrect": false
+                        },
+                        {
+                            "text": "✨ Une promotion automatique.",
+                            "rationale": "❌ C'est incorrect. Un manque de rigueur dans cette tâche essentielle ne mènerait pas à une promotion. 🚀",
+                            "isCorrect": false
+                        }
+                    ]
+                },
+                {
+                    "question": "Quel est l'un des éléments fondamentaux d'une bonne gestion de la paie mentionné dans le document, lié aux données remontées ?",
+                    "hint": "Il s'agit de la qualité de ces données.",
+                    "answerOptions": [
+                        {
+                            "text": "✨ La quantité de données collectées.",
+                            "rationale": "❌ C'est incorrect. La quantité n'est pas aussi importante que la qualité des données. 📊",
+                            "isCorrect": false
+                        },
+                        {
+                            "text": "✨ La rapidité de la collecte des données.",
+                            "rationale": "❌ C'est important, mais la qualité des données est primordiale. ⚡",
+                            "isCorrect": false
+                        },
+                        {
+                            "text": "✨ La justesse des données remontées.",
+                            "rationale": "✅ C'est la bonne réponse. Le document indique que la justesse des données remontées par la paie est l'un des éléments constitutifs d'une bonne gestion de la paie. 🎯",
+                            "isCorrect": true
+                        },
+                        {
+                            "text": "✨ La complexité des outils de collecte.",
+                            "rationale": "❌ C'est incorrect. La complexité des outils n'est pas un objectif en soi. 🤖",
+                            "isCorrect": false
+                        }
+                    ]
+                },
+                {
+                    "question": "Vrai ou Faux : La formation à la collecte et au calcul des variables de paie est un processus rapide qui ne nécessite pas de pratique régulière.",
+                    "hint": "La maîtrise des compétences fondamentales demande du temps et de l'application.",
+                    "answerOptions": [
+                        {
+                            "text": "✨ Vrai.",
+                            "rationale": "❌ C'est incorrect. Le document insiste sur la nécessité de 'maîtriser l'ensemble des compétences nécessaires à cette activité', ce qui implique un apprentissage continu et de la pratique. 🚫",
+                            "isCorrect": false
+                        },
+                        {
+                            "text": "✨ Faux.",
+                            "rationale": "✅ C'est la bonne réponse. La formation et la maîtrise des compétences en paie nécessitent du temps, de la pratique régulière et une veille constante pour rester à jour avec la législation. 🧠",
+                            "isCorrect": true
+                        }
+                    ]
+                },
+                {
+                    "question": "Quel type d'outils est mentionné dans le document comme pouvant aider à organiser le recueil d'informations pour la paie ?",
+                    "hint": "Pensez aux technologies modernes.",
+                    "answerOptions": [
+                        {
+                            "text": "✨ Des cahiers et des stylos.",
+                            "rationale": "❌ C'est une méthode traditionnelle, mais le document mentionne des outils plus modernes. ✍️",
+                            "isCorrect": false
+                        },
+                        {
+                            "text": "✨ Des outils digitaux.",
+                            "rationale": "✅ C'est la bonne réponse. Le document mentionne que de nombreux outils digitaux existent et peuvent aider à organiser le recueil d'informations pour la paie, facilitant ainsi la gestion. 💻",
+                            "isCorrect": true
+                        },
+                        {
+                            "text": "✨ Des tablettes d'argile.",
+                            "rationale": "❌ C'est une référence historique, mais pas un outil moderne de paie. 🗿",
+                            "isCorrect": false
+                        },
+                        {
+                            "text": "✨ Des machines à écrire.",
+                            "rationale": "❌ C'est une technologie obsolète pour la paie moderne. 🖨️",
+                            "isCorrect": false
+                        }
+                    ]
+                },
+                {
+                    "question": "Pourquoi la formation à la collecte et au calcul des variables de paie est-elle 'incontournable' pour un futur professionnel de la paie ?",
+                    "hint": "Pensez à l'importance de cette activité dans le métier.",
+                    "answerOptions": [
+                        {
+                            "text": "✨ Pour pouvoir travailler à l'étranger uniquement.",
+                            "rationale": "❌ C'est incorrect. La formation est essentielle pour la pratique en France également. 🌍",
+                            "isCorrect": false
+                        },
+                        {
+                            "text": "✨ Car c'est une activité secondaire et facile à apprendre sur le tas.",
+                            "rationale": "❌ C'est incorrect. Le document la présente comme une activité fondamentale et complexe. 🚫",
+                            "isCorrect": false
+                        },
+                        {
+                            "text": "✨ Car elle permet de répondre à des questions essentielles sur la conformité et la rémunération juste.",
+                            "rationale": "✅ C'est la bonne réponse. La collecte et le calcul des variables de paie sont incontournables car une bonne pratique permet de répondre à des questions essentielles sur l'intégration et l'analyse des variables, la conformité des dispositions applicables et la conformité réglementaire des documents. 🎯",
+                            "isCorrect": true
+                        },
+                        {
+                            "text": "✨ Pour obtenir une augmentation de salaire garantie.",
+                            "rationale": "❌ C'est incorrect. C'est une compétence métier, pas une garantie de salaire. 💰",
+                            "isCorrect": false
+                        }
+                    ]
+                },
+                {
+                    "question": "Vrai ou Faux : Le contrôle des justificatifs et des éléments à intégrer aux paies est une compétence essentielle pour un gestionnaire de paie.",
+                    "hint": "La vérification des pièces est cruciale pour la justesse.",
+                    "answerOptions": [
+                        {
+                            "text": "✨ Vrai.",
+                            "rationale": "✅ C'est la bonne réponse. Le contrôle des justificatifs et des éléments à intégrer aux paies est explicitement mentionné comme l'une des compétences fondamentales à maîtriser pour un gestionnaire de paie, garantissant l'exactitude des bulletins. 🧾",
+                            "isCorrect": true
+                        },
+                        {
+                            "text": "✨ Faux.",
+                            "rationale": "❌ C'est incorrect. La vérification est une étape cruciale du processus de paie. 🚫",
+                            "isCorrect": false
+                        }
+                    ]
+                },
+                {
+                    "question": "Quel est le point central de l'activité de gestion de paie, selon le document ?",
+                    "hint": "C'est le document final remis au salarié.",
+                    "answerOptions": [
+                        {
+                            "text": "✨ La déclaration sociale nominative (DSN).",
+                            "rationale": "❌ La DSN est une étape importante, mais le document met l'accent sur le document remis au salarié. 📊",
+                            "isCorrect": false
+                        },
+                        {
+                            "text": "✨ Le bulletin de paie.",
+                            "rationale": "✅ C'est la bonne réponse. Le document indique que le bulletin de paie constitue le point central de l'activité de gestion de paie, car il est le reflet de la rémunération et des droits du salarié. 📄",
+                            "isCorrect": true
+                        },
+                        {
+                            "text": "✨ Le contrat de travail.",
+                            "rationale": "❌ Le contrat de travail est la base, mais le bulletin de paie est le résultat final de la gestion. 📜",
+                            "isCorrect": false
+                        },
+                        {
+                            "text": "✨ Les entretiens annuels d'évaluation.",
+                            "rationale": "❌ C'est une tâche RH, sans lien direct avec le point central de la paie. 🤝",
+                            "isCorrect": false
+                        }
+                    ]
+                },
+                {
+                    "question": "Pourquoi la collecte des variables de paie est-elle décrite comme nécessitant 'rigueur et qualités humaines' ?",
+                    "hint": "Pensez aux deux facettes de l'interaction et de la précision.",
+                    "answerOptions": [
+                        {
+                            "text": "✨ La rigueur est pour les calculs, les qualités humaines pour les pauses café.",
+                            "rationale": "❌ C'est une simplification excessive. Les qualités humaines sont importantes dans l'interaction avec les salariés. ☕",
+                            "isCorrect": false
+                        },
+                        {
+                            "text": "✨ La rigueur est nécessaire pour la précision des calculs, et les qualités humaines pour le rôle d'interlocuteur privilégié des salariés.",
+                            "rationale": "✅ C'est la bonne réponse. La rigueur est indispensable pour la justesse des calculs et la conformité légale, tandis que les qualités humaines sont cruciales car le gestionnaire de paie est un interlocuteur privilégié des salariés, nécessitant écoute et compréhension. 🧠🤝",
+                            "isCorrect": true
+                        },
+                        {
+                            "text": "✨ La rigueur est pour les employeurs, les qualités humaines pour les employés.",
+                            "rationale": "❌ C'est incorrect. Ces qualités sont attendues du gestionnaire de paie lui-même. 🧑‍💼",
+                            "isCorrect": false
+                        },
+                        {
+                            "text": "✨ Seules les qualités humaines sont importantes, la machine fait le reste.",
+                            "rationale": "❌ C'est incorrect. Le document insiste sur l'importance des deux aspects. 🤖",
+                            "isCorrect": false
+                        }
+                    ]
+                },
+                {
+                    "question": "Vrai ou Faux : Les congés payés et les absences sont des variables de paie qui doivent être gérées avec précision.",
+                    "hint": "Ces éléments impactent directement la rémunération.",
+                    "answerOptions": [
+                        {
+                            "text": "✨ Vrai.",
+                            "rationale": "✅ C'est la bonne réponse. La gestion des périodes de congés et des absences est une des compétences fondamentales à maîtriser pour le calcul des variables de paie, car elles impactent directement la rémunération du salarié. 📅",
+                            "isCorrect": true
+                        },
+                        {
+                            "text": "✨ Faux.",
+                            "rationale": "❌ C'est incorrect. Ces éléments sont des variables cruciales en paie. 🚫",
+                            "isCorrect": false
+                        }
+                    ]
+                },
+                {
+                    "question": "Un gestionnaire de paie doit-il s'assurer que les variables transmises sont correctement intégrées et analysées ?",
+                    "hint": "Pensez à la fiabilité des données d'entrée.",
+                    "answerOptions": [
+                        {
+                            "text": "✨ Oui, c'est une question essentielle de la bonne pratique.",
+                            "rationale": "✅ C'est la bonne réponse. Le document mentionne explicitement : 'Les variables transmises sont-elles correctement intégrées et analysées ?' comme une question clé à laquelle une bonne pratique de paie doit permettre de répondre. 📊",
+                            "isCorrect": true
+                        },
+                        {
+                            "text": "✨ Non, ce n'est pas sa responsabilité directe.",
+                            "rationale": "❌ C'est incorrect. L'intégration et l'analyse des variables sont au cœur de la responsabilité du gestionnaire de paie. 🚫",
+                            "isCorrect": false
+                        }
+                    ]
+                },
+                {
+                    "question": "Vrai ou Faux : La paie est une activité qui ne nécessite pas de veille sociale régulière.",
+                    "hint": "La législation évolue constamment.",
+                    "answerOptions": [
+                        {
+                            "text": "✨ Vrai.",
+                            "rationale": "❌ C'est incorrect. La législation sociale évolue constamment, rendant la veille sociale indispensable pour tout professionnel de la paie afin d'assurer la conformité des bulletins. 🚫",
+                            "isCorrect": false
+                        },
+                        {
+                            "text": "✨ Faux.",
+                            "rationale": "✅ C'est la bonne réponse. La paie est une activité qui nécessite une veille sociale régulière et constante en raison des évolutions fréquentes de la législation et de la jurisprudence. 📚",
+                            "isCorrect": true
+                        }
+                    ]
+                },
+                {
+                    "question": "Quel est l'un des risques majeurs si un gestionnaire de paie ne maîtrise pas les compétences fondamentales de son métier ?",
+                    "hint": "Pensez aux conséquences d'une paie incorrecte.",
+                    "answerOptions": [
+                        {
+                            "text": "✨ Une augmentation inattendue des salaires.",
+                            "rationale": "❌ C'est une conséquence peu probable d'une mauvaise maîtrise générale des compétences. 💰",
+                            "isCorrect": false
+                        },
+                        {
+                            "text": "✨ Des erreurs dans les bulletins de paie et des litiges avec les salariés ou les organismes sociaux.",
+                            "rationale": "✅ C'est la bonne réponse. Une mauvaise maîtrise des compétences fondamentales peut entraîner des erreurs dans les bulletins de paie, des non-conformités, et potentiellement des litiges avec les salariés, l'URSSAF ou d'autres organismes sociaux. 🤯⚖️",
+                            "isCorrect": true
+                        },
+                        {
+                            "text": "✨ Une réduction de la charge de travail.",
+                            "rationale": "❌ C'est incorrect. Au contraire, les erreurs peuvent augmenter la charge de travail (corrections, litiges). ⏰",
+                            "isCorrect": false
+                        },
+                        {
+                            "text": "✨ Une promotion automatique.",
+                            "rationale": "❌ C'est incorrect. Un manque de compétence n'entraîne pas de promotion. 🚀",
+                            "isCorrect": false
+                        }
+                    ]
+                }
+            ]
+        };
+
+        let currentQuestionIndex = 0; // Tracks the current question being displayed
+        let score = 0; // Stores the user's score
+        // Stores the index of the user's selected answer for each question (original index)
+        let userAnswers = new Array(quizData.questions.length).fill(null);
+        // Tracks if a question was answered correctly on the first attempt
+        let answeredCorrectly = new Array(quizData.questions.length).fill(false);
+
+        // Get references to DOM elements
+        const quizContainer = document.getElementById('quiz');
+        const prevButton = document.getElementById('prevButton');
+        const nextButton = document.getElementById('nextButton');
+        const restartButton = document.getElementById('restartButton');
+        const progressBar = document.getElementById('progressBar');
+        const liveScoreDisplay = document.getElementById('liveScoreDisplay');
+        const correctProgressElement = document.getElementById('correctProgress');
+        const incorrectProgressElement = document.getElementById('incorrectProgress');
+        const unansweredProgressElement = document.getElementById('unansweredProgress');
+
+
+        // Function to shuffle an array (Fisher-Yates algorithm)
+        // Modified to preserve the original index of each option
+        function shuffleArray(array) {
+            // Create a copy of the array with the original index
+            let indexedArray = array.map((item, index) => ({ item, originalIndex: index }));
+            for (let i = indexedArray.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [indexedArray[i], indexedArray[j]] = [indexedArray[j], indexedArray[i]];
+            }
+            return indexedArray;
+        }
+
+        // Function to display the current question and its options
+        function displayQuestion() {
+            const questionData = quizData.questions[currentQuestionIndex];
+            // Mélanger les options en conservant leur index d'origine
+            const shuffledOptionsWithOriginalIndex = shuffleArray([...questionData.answerOptions]);
+
+            // Remplir le conteneur du quiz avec le texte de la question, l'indice et les options de réponse
+            quizContainer.innerHTML = `
+                <div class="question-text">${currentQuestionIndex + 1}. ${questionData.question}</div>
+                <div id="answerOptions" class="flex flex-col gap-3">
+                    ${shuffledOptionsWithOriginalIndex.map(optionWrapper => `
+                        <div class="answer-option rounded-xl p-4 cursor-pointer transition-all duration-200 ease-in-out hover:bg-blue-100 hover:shadow-md"
+                             data-original-index="${optionWrapper.originalIndex}"
+                             onclick="selectAnswer(this, ${optionWrapper.originalIndex})">
+                            ${optionWrapper.item.text}
+                        </div>
+                    `).join('')}
+                </div>
+                <div id="hint" class="hint-text hidden mt-4">Indice : ${questionData.hint}</div>
+                <div id="rationaleContainer" class="mt-4 hidden"></div>
+            `;
+
+            // Si l'utilisateur a déjà répondu à cette question, restaurer sa sélection et afficher la justification
+            if (userAnswers[currentQuestionIndex] !== null) {
+                const selectedOptionElement = quizContainer.querySelector(`[data-original-index="${userAnswers[currentQuestionIndex]}"]`);
+                if (selectedOptionElement) {
+                    // Appliquer la logique de showRationale pour restaurer les couleurs et justifications
+                    showRationale(selectedOptionElement, userAnswers[currentQuestionIndex]);
+                }
+            }
+
+            // Mettre à jour l'état des boutons de navigation et la barre de progression
+            updateNavigationButtons();
+            updateProgressBar();
+            updateLiveScoreDisplay(); // Mettre à jour l'affichage du score en direct
+        }
+
+        // Function to handle answer selection by the user
+        function selectAnswer(selectedElement, originalSelectedIndex) {
+            // Si la question a déjà été répondu, empêcher une nouvelle sélection
+            if (userAnswers[currentQuestionIndex] !== null) {
+                return;
+            }
+
+            // Stocker l'index D'ORIGINE de la réponse sélectionnée
+            userAnswers[currentQuestionIndex] = originalSelectedIndex;
+
+            // Appliquer la logique de showRationale pour afficher les couleurs et justifications
+            showRationale(selectedElement, originalSelectedIndex);
+        }
+
+        // Function to show rationale for all options and update the score
+        function showRationale(selectedElement, originalSelectedIndex) {
+            const questionData = quizData.questions[currentQuestionIndex];
+            const allOptionsElements = quizContainer.querySelectorAll('.answer-option');
+            const rationaleContainer = document.getElementById('rationaleContainer');
+            rationaleContainer.innerHTML = '';
+
+            let isCurrentAnswerCorrect = false; // Pour savoir si la réponse sélectionnée est correcte
+
+            allOptionsElements.forEach(optionElement => {
+                const optionOriginalIndex = parseInt(optionElement.dataset.originalIndex);
+                const optionData = questionData.answerOptions[optionOriginalIndex];
+                const isCorrectOption = optionData.isCorrect;
+                const rationaleText = optionData.rationale;
+
+                // Nettoyer toutes les classes de couleur avant d'appliquer les nouvelles
+                optionElement.classList.remove('selected', 'correct', 'incorrect');
+
+                // Créer un div pour la justification de chaque option
+                const rationaleDiv = document.createElement('div');
+                rationaleDiv.classList.add('rationale', 'rounded-lg', 'p-3', 'mb-2');
+                rationaleDiv.innerHTML = `<strong>${optionElement.innerText}:</strong> ${rationaleText}`;
+
+                // Logique de couleur pour les options de réponse (l'élément cliqué et les autres)
+                if (optionOriginalIndex === originalSelectedIndex) {
+                    // C'est l'option sélectionnée par l'utilisateur
+                    optionElement.classList.add('selected'); // Jaune pour l'option sélectionnée
+                    if (isCorrectOption) {
+                        isCurrentAnswerCorrect = true;
+                        // Si la réponse sélectionnée est correcte, sa justification est bleue
+                        rationaleDiv.classList.add('correct-rationale');
+                    } else {
+                        // Si la réponse sélectionnée est incorrecte, sa justification est jaune
+                        rationaleDiv.classList.add('selected-rationale');
+                    }
+                } else if (isCorrectOption) {
+                    // C'est la bonne réponse, mais non sélectionnée par l'utilisateur
+                    optionElement.classList.add('correct'); // Bleu pour la bonne réponse non sélectionnée
+                    rationaleDiv.classList.add('correct-rationale'); // Bleu pour sa justification
+                } else {
+                    // C'est une mauvaise réponse, non sélectionnée par l'utilisateur
+                    optionElement.classList.add('incorrect'); // Fuchsia pour les mauvaises réponses non sélectionnées
+                    rationaleDiv.classList.add('incorrect-rationale'); // Fuchsia pour sa justification
+                }
+
+                rationaleContainer.appendChild(rationaleDiv);
+            });
+
+            // Mettre à jour le score et le statut `answeredCorrectly`
+            if (userAnswers[currentQuestionIndex] !== null && answeredCorrectly[currentQuestionIndex] === false) {
+                if (isCurrentAnswerCorrect) {
+                    score++;
+                    answeredCorrectly[currentQuestionIndex] = true;
+                }
+            }
+
+            updateLiveScoreDisplay();
+            updateProgressBar(); // Mettre à jour la barre de progression après la sélection
+            rationaleContainer.classList.remove('hidden');
+            allOptionsElements.forEach(option => option.style.pointerEvents = 'none'); // Désactiver les clics après la sélection
+            nextButton.disabled = false;
+        }
+
+        // Fonction pour mettre à jour l'état des boutons de navigation (Précédent/Suivant)
+        function updateNavigationButtons() {
+            prevButton.disabled = currentQuestionIndex === 0;
+            // Le bouton Suivant est désactivé si la question actuelle n'a pas encore été répondu
+            nextButton.disabled = userAnswers[currentQuestionIndex] === null;
+            nextButton.textContent = currentQuestionIndex === quizData.questions.length - 1 ? 'Voir les résultats' : 'Suivant';
+        }
+
+        // Fonction pour mettre à jour la barre de progression colorée
+        function updateProgressBar() {
+            const totalQuestions = quizData.questions.length;
+            let correctCount = 0;
+            let incorrectCount = 0;
+            let unansweredCount = 0;
+
+            for (let i = 0; i < totalQuestions; i++) {
+                if (userAnswers[i] !== null) {
+                    const originalOptionIndex = userAnswers[i];
+                    const isCorrect = quizData.questions[i].answerOptions[originalOptionIndex].isCorrect;
+                    if (isCorrect) {
+                        correctCount++;
+                    } else {
+                        incorrectCount++;
+                    }
+                } else {
+                    unansweredCount++;
+                }
+            }
+
+            const correctPercentage = (correctCount / totalQuestions) * 100;
+            const incorrectPercentage = (incorrectCount / totalQuestions) * 100;
+            const unansweredPercentage = (unansweredCount / totalQuestions) * 100;
+
+            correctProgressElement.style.width = `${correctPercentage}%`;
+            incorrectProgressElement.style.width = `${incorrectPercentage}%`;
+            unansweredProgressElement.style.width = `${unansweredPercentage}%`;
+
+            // Afficher les pourcentages à l'intérieur des sections si > 0
+            correctProgressElement.textContent = correctPercentage > 0 ? `${correctPercentage.toFixed(0)}%` : '';
+            incorrectProgressElement.textContent = incorrectPercentage > 0 ? `${incorrectPercentage.toFixed(0)}%` : '';
+            unansweredProgressElement.textContent = unansweredPercentage > 0 ? `${unansweredPercentage.toFixed(0)}%` : '';
+        }
+
+        // Fonction pour mettre à jour l'affichage du score en direct
+        function updateLiveScoreDisplay() {
+            const totalQuestions = quizData.questions.length;
+            const currentQuestionNumber = currentQuestionIndex + 1;
+            const answeredCount = userAnswers.filter(answer => answer !== null).length; // Compte les questions auxquelles une réponse a été donnée
+
+            let correctCount = 0;
+            let incorrectCount = 0;
+
+            for (let i = 0; i < answeredCount; i++) {
+                if (userAnswers[i] !== null) {
+                    const originalOptionIndex = userAnswers[i];
+                    const isCorrect = quizData.questions[i].answerOptions[originalOptionIndex].isCorrect;
+                    if (isCorrect) {
+                        correctCount++;
+                    } else {
+                        incorrectCount++;
+                    }
+                }
+            }
+            
+            let percentageCorrect = 0;
+            let percentageIncorrect = 0;
+
+            if (answeredCount > 0) {
+                percentageCorrect = ((correctCount / answeredCount) * 100).toFixed(0);
+                percentageIncorrect = ((incorrectCount / answeredCount) * 100).toFixed(0);
+            }
+
+            liveScoreDisplay.textContent = `Score : ${correctCount} / ${answeredCount} (${percentageCorrect}% de réussite, ${percentageIncorrect}% d'échecs) - Question ${currentQuestionNumber} / ${totalQuestions}`;
+        }
+
+        // Fonction pour afficher les résultats finaux du quiz
+        function showResults() {
+            const totalQuestions = quizData.questions.length;
+            let finalCorrectCount = 0;
+            let finalIncorrectCount = 0;
+            let finalUnansweredCount = 0;
+
+            for (let i = 0; i < totalQuestions; i++) {
+                if (userAnswers[i] !== null) {
+                    const originalOptionIndex = userAnswers[i];
+                    const isCorrect = quizData.questions[i].answerOptions[originalOptionIndex].isCorrect;
+                    if (isCorrect) {
+                        finalCorrectCount++;
+                    } else {
+                        finalIncorrectCount++;
+                    }
+                } else {
+                    finalUnansweredCount++;
+                }
+            }
+
+            const finalCorrectPercentage = ((finalCorrectCount / totalQuestions) * 100).toFixed(0);
+            const finalIncorrectPercentage = ((finalIncorrectCount / totalQuestions) * 100).toFixed(0);
+            const finalUnansweredPercentage = ((finalUnansweredCount / totalQuestions) * 100).toFixed(0);
+
+            let feedbackMessage = "";
+            let celebrationContent = "";
+            let shareFeedbackMessage = ""; // Specific message for sharing
+
+            if (finalCorrectPercentage <= 25) {
+                feedbackMessage = `Votre score de ${finalCorrectPercentage}% de réussite est un bon début. Il est temps de revoir vos cours ! Continuez votre apprentissage en pratiquant et en regardant les lives. C'est essentiel pour progresser. 📚💡`;
+                shareFeedbackMessage = `Mon résultat est de ${finalCorrectPercentage}% de réussite. Il est temps de revoir mes cours et de progresser !`;
+            } else if (finalCorrectPercentage <= 50) {
+                feedbackMessage = `Votre score de ${finalCorrectPercentage}% de réussite est encourageant. C'est bien, continuez ainsi ! Le prochain palier est 75%. Pour y arriver, continuez à progresser, suivez les lives, appliquez les concepts et faites de la veille sociale. 💪🚀`;
+                shareFeedbackMessage = `Mon score est de ${finalCorrectPercentage}% de réussite. C'est encourageant, mais je vise plus haut !`;
+            } else if (finalCorrectPercentage <= 75) {
+                feedbackMessage = `Félicitations pour votre score de ${finalCorrectPercentage}% de réussite ! Vos efforts portent leurs fruits. Vous pouvez continuer à vous performer et viser l'excellence. 🌟🎯`;
+                shareFeedbackMessage = `J'ai obtenu ${finalCorrectPercentage}% de réussite ! Très bon score, je continue de m'améliorer !`;
+            } else { // > 75% up to 100%
+                feedbackMessage = `Félicitations pour votre score de ${finalCorrectPercentage}% de réussite ! 🎉🔥 Vous maîtrisez le sujet ! N'oubliez pas que nous sommes une équipe, motivez la troupe et le transfert de compétences est important : aidez les autres personnes. 🏅🎓`;
+                celebrationContent = `
+                    <p class="text-2xl font-bold text-yellow-500 mt-4">🎉🔥 MÉDAILLE D'OR ! 🔥🎉</p>
+                    <p class="text-xl font-semibold text-blue-600">Diplôme de Maîtrise du Règlement du Salaire !</p>
+                `;
+                shareFeedbackMessage = `J'ai atteint ${finalCorrectPercentage}% de réussite ! C'est la fête ! Je suis prêt à partager mes connaissances et à motiver la troupe !`;
+            }
+
+            // Get the quiz title from the <title> tag
+            const quizTitle = document.title;
+            // Construct the shareable message for Discord/WhatsApp
+            const shareMessage = `Voici les résultats obtenus lors de mon test quiz "${quizTitle}" ! J'ai eu ${finalCorrectPercentage}% de réussite. ${shareFeedbackMessage} Prêts à échanger sur Discord/WhatsApp pour progresser ensemble ?`;
+
+            quizContainer.innerHTML = `
+                <div class="score-display">Votre score final : ${finalCorrectCount} sur ${totalQuestions}</div>
+                <p class="text-lg text-gray-700 mb-4">Un aperçu de votre performance :</p>
+
+                <div class="progress-bar final-results-chart-container">
+                    <div class="progress-section correct-section" style="width: ${finalCorrectPercentage}%;">
+                        ${finalCorrectPercentage > 0 ? `${finalCorrectPercentage}%` : ''}
+                    </div>
+                </div>
+
+                <p class="text-xl font-semibold text-gray-800 mt-6">${feedbackMessage}</p>
+                ${celebrationContent}
+                <div class="mt-8 p-4 bg-gray-100 rounded-lg shadow-inner">
+                    <p class="text-lg font-semibold text-gray-700 mb-2">Partagez vos résultats et échangez !</p>
+                    <textarea id="shareableResult" class="w-full p-2 border rounded-md text-gray-700 bg-gray-50 mb-4" rows="4" readonly>${shareMessage}</textarea>
+                    <button id="copyResultButton" class="button bg-green-500 hover:bg-green-600 mb-4">Copier le message de partage</button>
+                    <p class="text-md text-gray-600 mb-2">Rejoignez la discussion sur :</p>
+                    <a href="https://discord.com/channels/1390693097033175060/1391491121061826582" target="_blank" class="inline-block mt-2 bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300">
+                        Discord ✨・espace-papotage
+                    </a>
+                    <a href="https://chat.whatsapp.com/FuBgQZStV0r2dgIDxJe2g9" target="_blank" class="inline-block mt-2 ml-2 bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300">
+                        WhatsApp 🔥 | Payroll Boss Elite Club 👑
+                    </a>
+                </div>
+            `;
+
+            // Add copy to clipboard functionality
+            document.getElementById('copyResultButton').addEventListener('click', () => {
+                const shareableResult = document.getElementById('shareableResult');
+                shareableResult.select();
+                document.execCommand('copy');
+                // Optional: Provide visual feedback that text has been copied
+                shareableResult.style.borderColor = '#10B981'; // Green border
+                shareableResult.style.boxShadow = '0 0 0 2px #10B981';
+                setTimeout(() => {
+                    shareableResult.style.borderColor = '';
+                    shareableResult.style.boxShadow = '';
+                }, 1500);
+            });
+
+            // Hide navigation buttons and show restart button
+            prevButton.classList.add('hidden');
+            nextButton.classList.add('hidden');
+            restartButton.classList.remove('hidden');
+            liveScoreDisplay.classList.add('hidden'); // Hide live score display at the end
+        }
+
+        // Écouteur d'événement pour le bouton 'Suivant'
+        nextButton.addEventListener('click', () => {
+            if (currentQuestionIndex < quizData.questions.length - 1) {
+                currentQuestionIndex++; // Passer à la question suivante
+                displayQuestion(); // Afficher la nouvelle question
+            } else {
+                showResults(); // Si c'est la dernière question, afficher les résultats
+            }
+        });
+
+        // Écouteur d'événement pour le bouton 'Précédent'
+        prevButton.addEventListener('click', () => {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--; // Revenir à la question précédente
+                displayQuestion(); // Afficher la nouvelle question
+            } else {
+                // If on the first question and trying to go back, just re-display it
+                displayQuestion();
+            }
+        });
+
+        // Écouteur d'événement pour le bouton 'Recommencer le Quiz'
+        restartButton.addEventListener('click', () => {
+            currentQuestionIndex = 0; // Réinitialiser l'index de la question
+            score = 0; // Réinitialiser le score
+            userAnswers.fill(null); // Effacer les réponses de l'utilisateur
+            answeredCorrectly.fill(false); // Réinitialiser le suivi de la justesse
+            // Afficher les boutons de navigation et cacher le bouton de redémarrage
+            prevButton.classList.remove('hidden');
+            nextButton.classList.remove('hidden');
+            restartButton.classList.add('hidden');
+            liveScoreDisplay.classList.remove('hidden'); // Réafficher l'affichage du score en direct
+            displayQuestion(); // Commencer le quiz depuis le début
+        });
+
+        // Affichage initial de la première question au chargement de la page
+        displayQuestion();
+    </script>
+</body>
+</html>
