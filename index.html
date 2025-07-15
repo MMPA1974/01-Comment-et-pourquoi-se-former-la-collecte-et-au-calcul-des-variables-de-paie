@@ -186,6 +186,69 @@
             width: 100% !important; /* Force la section correcte à prendre toute la largeur disponible */
             justify-content: center; /* Centrer le texte */
         }
+        /* Style pour le message de bonus */
+        .bonus-message {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 8px;
+            font-weight: bold;
+            text-align: center;
+        }
+        .bonus-message.success {
+            background-color: #d1fae5; /* Vert très clair */
+            color: #065f46; /* Vert foncé */
+            border: 1px solid #34d399;
+        }
+        .bonus-message.info {
+            background-color: #e0f2fe; /* Bleu très clair */
+            color: #2563eb; /* Bleu foncé */
+            border: 1px solid #60a5fa;
+        }
+
+        /* Style pour l'indice interactif */
+        .interactive-hint-display {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 8px;
+            font-style: italic;
+            color: #718096; /* Texte gris */
+            background-color: #fef3c7; /* Fond jaune très clair */
+            border: 1px solid #fcd34d; /* Bordure jaune */
+            text-align: center;
+            font-size: 1rem;
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out; /* Transition douce */
+        }
+
+        /* Animation de fondu */
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Style pour l'indice avant choix */
+        .pre-choice-hint {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 8px;
+            background-color: #f0f9ff; /* Bleu très très clair */
+            color: #3b82f6; /* Bleu plus prononcé */
+            font-style: italic;
+            text-align: center;
+            font-size: 0.95rem;
+            border: 1px solid #bfdbfe;
+        }
+
+        /* Styles pour les logos SVG */
+        .footer-links svg {
+            width: 1.5rem;
+            height: 1.5rem;
+            vertical-align: middle;
+            display: inline-block; /* Pour aligner avec le texte */
+        }
     </style>
 </head>
 <body>
@@ -206,6 +269,35 @@
             <button id="nextButton" class="button">Suivant</button>
         </div>
         <button id="restartButton" class="button mt-6 hidden">Recommencer le Quiz</button>
+
+        <!-- Nouvelle section pour les liens sociaux et le message inspirant -->
+        <div class="footer-links mt-8 p-4 bg-gray-100 rounded-lg shadow-inner text-center">
+            <p class="text-lg font-semibold text-gray-700 mb-4">
+                Rejoignez notre équipe pour monter en compétence au niveau de la paie !
+            </p>
+            <p class="text-sm text-gray-600 mb-4">
+                Le monde de la paie est complexe, mais ensemble, nous pouvons le maîtriser.
+                Rejoignez notre communauté de professionnels passionnés pour échanger, apprendre et progresser.
+                Votre expertise de demain commence ici !
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+                <a href="https://discord.gg/cBnBkGDFgk" target="_blank" class="flex items-center bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300">
+                    <svg class="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M20.22 0H3.78C1.7 0 0 1.7 0 3.78v16.44C0 22.3 1.7 24 3.78 24h16.44c2.08 0 3.78-1.7 3.78-3.78V3.78C24 1.7 22.3 0 20.22 0zM17.2 17.5c-.7 0-1.2-.5-1.2-1.2V14c0-.7.5-1.2 1.2-1.2s1.2.5 1.2 1.2v2.3c0 .7-.5 1.2-1.2 1.2zM6.8 17.5c-.7 0-1.2-.5-1.2-1.2V14c0-.7.5-1.2 1.2-1.2s1.2.5 1.2 1.2v2.3c0 .7-.5 1.2-1.2 1.2zM12 19.8c-2.8 0-5.1-2.3-5.1-5.1V9.2c0-2.8 2.3-5.1 5.1-5.1s5.1 2.3 5.1 5.1v5.5c0 2.8-2.3 5.1-5.1 5.1zM12 6.8c-1.4 0-2.5 1.1-2.5 2.5v5.5c0 1.4 1.1 2.5 2.5 2.5s2.5-1.1 2.5-2.5V9.2c0-1.4-1.1-2.5-2.5-2.5z"/>
+                    </svg>
+                    Discord 🔥 Payroll Boss Elite Club : Le Hub Paie & Progrès 📈
+                </a>
+                <a href="https://chat.whatsapp.com/EtV0ux5ipAG5JDhopzo0ut" target="_blank" class="flex items-center bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300">
+                    <svg class="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.74.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21 5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm.04 18.12c-1.48 0-2.93-.4-4.2-1.16l-.3-.18-3.1 1.02 1.04-3.04-.2-.31c-.8-1.26-1.24-2.7-1.24-4.26 0-4.54 3.7-8.23 8.24-8.23s8.23 3.7 8.23 8.23c0 4.54-3.7 8.24-8.23 8.24zm4.52-6.17c-.25-.12-.92-.46-1.06-.51-.14-.05-.29-.07-.42.07-.14.14-.54.68-.66.82-.12.14-.25.16-.49.06-.24-.1-.99-.36-1.89-1.16-.7-.63-1.17-1.4-1.31-1.64-.14-.25-.01-.38.11-.5-.11-.29-.25-.46-.38-.65-.13-.19-.01-.36.09-.54.08-.14.42-.36.5-.51.08-.14.04-.25-.02-.38-.06-.14-.51-1.99-.7-2.72-.18-.7-.36-.59-.51-.6-.14-.02-.3-.02-.42-.02-.14 0-.36.05-.55.24-.19.19-.72.7-.72 1.71s.74 1.99.84 2.13c.1 0 1.46 2.23 3.54 3.02 1.03.39 1.84.62 2.46.79.97.27 1.25.22 1.7-.06.48-.3 1.46-.6 1.66-.92.2-.3.2-.5.14-.62z"/>
+                    </svg>
+                    WhatsApp 🔥 Payroll Boss Elite Club 👑| Infos & Actus
+                </a>
+            </div>
+            <p class="text-sm text-gray-500 mt-4">
+                © <span id="currentYear"></span> Le monde de la paie. Tous droits réservés.
+            </p>
+        </div>
     </div>
 
     <script>
@@ -216,6 +308,7 @@
                 {
                     "question": "Quel est l'objectif principal de la formation à la collecte et au calcul des variables de paie pour un futur gestionnaire ?",
                     "hint": "Pensez à la finalité de cette activité pour la rémunération des salariés.",
+                    "preChoiceHint": "Un bon gestionnaire de paie, c'est un peu comme un super-héros de la justice salariale ! 🦸",
                     "answerOptions": [
                         {
                             "text": "✨ Apprendre à réduire le temps de travail des salariés.",
@@ -242,6 +335,7 @@
                 {
                     "question": "Vrai ou Faux : La gestion des variables de paie implique uniquement des compétences techniques en calcul.",
                     "hint": "Pensez à l'aspect relationnel et humain de la fonction.",
+                    "preChoiceHint": "La paie, c'est aussi une affaire de cœur (et de communication) ! ❤️",
                     "answerOptions": [
                         {
                             "text": "✨ Vrai.",
@@ -258,6 +352,7 @@
                 {
                     "question": "Selon le document, quelle est l'une des tâches fondamentales qu'un gestionnaire de paie doit maîtriser pour le calcul des variables ?",
                     "hint": "Pensez à la première étape du processus de paie.",
+                    "preChoiceHint": "Avant de construire une maison, on a besoin d'un plan et des bons outils, n'est-ce pas ? 🏗️",
                     "answerOptions": [
                         {
                             "text": "✨ La négociation des salaires des nouveaux employés.",
@@ -284,6 +379,7 @@
                 {
                     "question": "Pourquoi est-il crucial pour un gestionnaire de paie de bien recueillir les informations préalables à la paie ?",
                     "hint": "Pensez aux conséquences d'informations incorrectes.",
+                    "preChoiceHint": "Imaginez cuisiner sans les bonnes quantités... catastrophe assurée ! 🍳",
                     "answerOptions": [
                         {
                             "text": "✨ Pour augmenter le salaire des employés.",
@@ -310,6 +406,7 @@
                 {
                     "question": "Vrai ou Faux : Les outils digitaux ont rendu la compréhension des obligations et des variables recueillies obsolète pour le gestionnaire de paie.",
                     "hint": "Les outils facilitent, mais ne remplacent pas toujours l'expertise.",
+                    "preChoiceHint": "Un marteau, c'est bien, mais il faut savoir où taper ! 🔨",
                     "answerOptions": [
                         {
                             "text": "✨ Vrai.",
@@ -321,11 +418,13 @@
                             "rationale": "✅ C'est la bonne réponse. Le document insiste sur le fait qu'il est fondamental d'avoir une bonne compréhension des obligations et des variables recueillies, même avec l'aide des outils digitaux. Ces outils facilitent la tâche, mais ne remplacent pas l'expertise du gestionnaire. 🧠",
                             "isCorrect": true
                         }
-                    ]
+                    ],
+                    "interactiveHint": { "text": "Hmm, même avec un super GPS, vous devez savoir où vous allez ! 🗺️" }
                 },
                 {
                     "question": "Quel est le rôle principal d'un gestionnaire de paie dans une entreprise, au-delà du simple calcul ?",
                     "hint": "Pensez à sa position au sein de la mission RH.",
+                    "preChoiceHint": "Le gestionnaire de paie, c'est le chef d'orchestre de la symphonie salariale ! 🎶",
                     "answerOptions": [
                         {
                             "text": "✨ Gérer les recrutements et les départs de salariés.",
@@ -352,6 +451,7 @@
                 {
                     "question": "Vrai ou Faux : La pédagogie de la législation applicable est une étape secondaire dans la réalisation des calculs de paie.",
                     "hint": "La compréhension de la loi est essentielle pour la justesse.",
+                    "preChoiceHint": "Connaître la loi, c'est la base pour éviter les ennuis... et les erreurs de paie ! 🤓",
                     "answerOptions": [
                         {
                             "text": "✨ Vrai.",
@@ -363,11 +463,13 @@
                             "rationale": "✅ C'est la bonne réponse. La pédagogie de la législation applicable est une étape fondamentale et non secondaire pour la réalisation des calculs de paie, assurant leur conformité et leur exactitude. 📘",
                             "isCorrect": true
                         }
-                    ]
+                    ],
+                    "interactiveHint": { "text": "La loi, c'est comme la recette : si on ne la suit pas, le plat est immangeable ! ⚖️" }
                 },
                 {
                     "question": "Quelles sont les trois questions essentielles auxquelles une bonne pratique de la collecte et du calcul des variables de paie doit permettre de répondre ?",
                     "hint": "Pensez à la conformité, à la spécificité et à l'intégration.",
+                    "preChoiceHint": "Trois questions pour une paie parfaite, c'est comme les trois mousquetaires de la conformité ! ⚔️",
                     "answerOptions": [
                         {
                             "text": "✨ Comment réduire les coûts de personnel, comment augmenter les profits, et comment gérer les conflits sociaux ?",
@@ -394,6 +496,7 @@
                 {
                     "question": "Vrai ou Faux : Un gestionnaire de paie n'a pas besoin de connaître les spécificités contractuelles de chaque salarié pour calculer correctement la paie.",
                     "hint": "Chaque contrat peut avoir des clauses particulières.",
+                    "preChoiceHint": "Chaque contrat est une histoire unique, et le gestionnaire de paie doit en être le narrateur précis ! 📖",
                     "answerOptions": [
                         {
                             "text": "✨ Vrai.",
@@ -405,11 +508,13 @@
                             "rationale": "✅ C'est la bonne réponse. Le gestionnaire de paie doit impérativement connaître les spécificités contractuelles de chaque salarié (durée du travail, primes, etc.) pour calculer une paie juste et conforme. 📜",
                             "isCorrect": true
                         }
-                    ]
+                    ],
+                    "interactiveHint": { "text": "Chaque salarié est unique, comme un flocon de neige... ou un bulletin de paie ! ❄️" }
                 },
                 {
                     "question": "Quel est le risque pour un gestionnaire de paie qui ne recueille pas correctement les informations préalables, selon le document ?",
                     "hint": "Pensez aux conséquences sur la gestion de la paie et le bien-être.",
+                    "preChoiceHint": "Une petite erreur de saisie peut vite devenir un gros casse-tête ! 🤯",
                     "answerOptions": [
                         {
                             "text": "✨ Une augmentation de son propre salaire.",
@@ -428,7 +533,7 @@
                         },
                         {
                             "text": "✨ Une promotion automatique.",
-                            "rationale": "❌ C'est incorrect. Un manque de rigueur dans cette tâche essentielle ne mènerait pas à une promotion. 🚀",
+                            "rationale": "❌ C'est incorrect. Un manque de rigueur dans cette tâche essentielle ne mènerait pas à une promotion. �",
                             "isCorrect": false
                         }
                     ]
@@ -436,6 +541,7 @@
                 {
                     "question": "Quel est l'un des éléments fondamentaux d'une bonne gestion de la paie mentionné dans le document, lié aux données remontées ?",
                     "hint": "Il s'agit de la qualité de ces données.",
+                    "preChoiceHint": "La qualité des données, c'est la clé de voûte de la paie ! 🔑",
                     "answerOptions": [
                         {
                             "text": "✨ La quantité de données collectées.",
@@ -462,6 +568,7 @@
                 {
                     "question": "Vrai ou Faux : La formation à la collecte et au calcul des variables de paie est un processus rapide qui ne nécessite pas de pratique régulière.",
                     "hint": "La maîtrise des compétences fondamentales demande du temps et de l'application.",
+                    "preChoiceHint": "Rome ne s'est pas faite en un jour, et la maîtrise de la paie non plus ! 🏛️",
                     "answerOptions": [
                         {
                             "text": "✨ Vrai.",
@@ -473,11 +580,13 @@
                             "rationale": "✅ C'est la bonne réponse. La formation et la maîtrise des compétences en paie nécessitent du temps, de la pratique régulière et une veille constante pour rester à jour avec la législation. 🧠",
                             "isCorrect": true
                         }
-                    ]
+                    ],
+                    "interactiveHint": { "text": "La paie, ce n'est pas une course de vitesse, c'est un marathon de précision ! 🏃‍♀️" }
                 },
                 {
                     "question": "Quel type d'outils est mentionné dans le document comme pouvant aider à organiser le recueil d'informations pour la paie ?",
                     "hint": "Pensez aux technologies modernes.",
+                    "preChoiceHint": "Fini le temps des tablettes d'argile, place à la technologie ! 💻",
                     "answerOptions": [
                         {
                             "text": "✨ Des cahiers et des stylos.",
@@ -504,6 +613,7 @@
                 {
                     "question": "Pourquoi la formation à la collecte et au calcul des variables de paie est-elle 'incontournable' pour un futur professionnel de la paie ?",
                     "hint": "Pensez à l'importance de cette activité dans le métier.",
+                    "preChoiceHint": "C'est comme le permis de conduire pour un pilote : indispensable ! ✈️",
                     "answerOptions": [
                         {
                             "text": "✨ Pour pouvoir travailler à l'étranger uniquement.",
@@ -530,6 +640,7 @@
                 {
                     "question": "Vrai ou Faux : Le contrôle des justificatifs et des éléments à intégrer aux paies est une compétence essentielle pour un gestionnaire de paie.",
                     "hint": "La vérification des pièces est cruciale pour la justesse.",
+                    "preChoiceHint": "Un bon détective de la paie vérifie toutes les preuves ! 🕵️",
                     "answerOptions": [
                         {
                             "text": "✨ Vrai.",
@@ -546,6 +657,7 @@
                 {
                     "question": "Quel est le point central de l'activité de gestion de paie, selon le document ?",
                     "hint": "C'est le document final remis au salarié.",
+                    "preChoiceHint": "Le Saint Graal de la paie, c'est... 🏆",
                     "answerOptions": [
                         {
                             "text": "✨ La déclaration sociale nominative (DSN).",
@@ -572,6 +684,7 @@
                 {
                     "question": "Pourquoi la collecte des variables de paie est-elle décrite comme nécessitant 'rigueur et qualités humaines' ?",
                     "hint": "Pensez aux deux facettes de l'interaction et de la précision.",
+                    "preChoiceHint": "C'est un peu comme être un robot avec un cœur d'or ! 🤖❤️",
                     "answerOptions": [
                         {
                             "text": "✨ La rigueur est pour les calculs, les qualités humaines pour les pauses café.",
@@ -598,6 +711,7 @@
                 {
                     "question": "Vrai ou Faux : Les congés payés et les absences sont des variables de paie qui doivent être gérées avec précision.",
                     "hint": "Ces éléments impactent directement la rémunération.",
+                    "preChoiceHint": "Chaque jour de congé compte... pour la paie ! 🏖️",
                     "answerOptions": [
                         {
                             "text": "✨ Vrai.",
@@ -614,6 +728,7 @@
                 {
                     "question": "Un gestionnaire de paie doit-il s'assurer que les variables transmises sont correctement intégrées et analysées ?",
                     "hint": "Pensez à la fiabilité des données d'entrée.",
+                    "preChoiceHint": "Un comptable qui ne vérifie pas ses chiffres, c'est comme un chef sans papilles ! 👨‍🍳",
                     "answerOptions": [
                         {
                             "text": "✨ Oui, c'est une question essentielle de la bonne pratique.",
@@ -630,6 +745,7 @@
                 {
                     "question": "Vrai ou Faux : La paie est une activité qui ne nécessite pas de veille sociale régulière.",
                     "hint": "La législation évolue constamment.",
+                    "preChoiceHint": "Le droit du travail bouge plus vite qu'un caméléon ! 🦎",
                     "answerOptions": [
                         {
                             "text": "✨ Vrai.",
@@ -641,11 +757,13 @@
                             "rationale": "✅ C'est la bonne réponse. La paie est une activité qui nécessite une veille sociale régulière et constante en raison des évolutions fréquentes de la législation et de la jurisprudence. 📚",
                             "isCorrect": true
                         }
-                    ]
+                    ],
+                    "interactiveHint": { "text": "Le droit social, c'est comme la météo : ça change tout le temps ! Restez à jour ! ☁️" }
                 },
                 {
                     "question": "Quel est l'un des risques majeurs si un gestionnaire de paie ne maîtrise pas les compétences fondamentales de son métier ?",
                     "hint": "Pensez aux conséquences d'une paie incorrecte.",
+                    "preChoiceHint": "Une paie mal faite, c'est un peu comme un château de cartes : ça s'écroule vite ! 🃏",
                     "answerOptions": [
                         {
                             "text": "✨ Une augmentation inattendue des salaires.",
@@ -678,6 +796,9 @@
         let userAnswers = new Array(quizData.questions.length).fill(null);
         // Tracks if a question was answered correctly on the first attempt
         let answeredCorrectly = new Array(quizData.questions.length).fill(false);
+        // Tracks if the bonus for first attempt was already applied for a question
+        let firstAttemptBonusApplied = new Array(quizData.questions.length).fill(false);
+        const BONUS_POINTS = 10; // Points to award for a correct first attempt
 
         // Get references to DOM elements
         const quizContainer = document.getElementById('quiz');
@@ -689,6 +810,9 @@
         const correctProgressElement = document.getElementById('correctProgress');
         const incorrectProgressElement = document.getElementById('incorrectProgress');
         const unansweredProgressElement = document.getElementById('unansweredProgress');
+
+        // Set current year in footer
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
 
 
         // Function to shuffle an array (Fisher-Yates algorithm)
@@ -712,6 +836,7 @@
             // Remplir le conteneur du quiz avec le texte de la question, l'indice et les options de réponse
             quizContainer.innerHTML = `
                 <div class="question-text">${currentQuestionIndex + 1}. ${questionData.question}</div>
+                ${questionData.preChoiceHint ? `<div id="preChoiceHint" class="pre-choice-hint">${questionData.preChoiceHint}</div>` : ''}
                 <div id="answerOptions" class="flex flex-col gap-3">
                     ${shuffledOptionsWithOriginalIndex.map(optionWrapper => `
                         <div class="answer-option rounded-xl p-4 cursor-pointer transition-all duration-200 ease-in-out hover:bg-blue-100 hover:shadow-md"
@@ -723,6 +848,8 @@
                 </div>
                 <div id="hint" class="hint-text hidden mt-4">Indice : ${questionData.hint}</div>
                 <div id="rationaleContainer" class="mt-4 hidden"></div>
+                <div id="bonusMessage" class="bonus-message hidden"></div> <!-- Nouveau div pour le message de bonus -->
+                <div id="interactiveHintDisplay" class="interactive-hint-display hidden mt-4"></div> <!-- Nouveau div pour l'indice interactif -->
             `;
 
             // Si l'utilisateur a déjà répondu à cette question, restaurer sa sélection et afficher la justification
@@ -730,9 +857,14 @@
                 const selectedOptionElement = quizContainer.querySelector(`[data-original-index="${userAnswers[currentQuestionIndex]}"]`);
                 if (selectedOptionElement) {
                     // Appliquer la logique de showRationale pour restaurer les couleurs et justifications
-                    showRationale(selectedOptionElement, userAnswers[currentQuestionIndex]);
+                    showRationale(selectedOptionElement, userAnswers[currentQuestionIndex], false); // Ne pas recalculer le bonus si déjà répondu
                 }
+            } else {
+                // S'assurer que les messages de bonus et d'indice interactif sont cachés pour une nouvelle question
+                document.getElementById('bonusMessage').classList.add('hidden');
+                document.getElementById('interactiveHintDisplay').classList.add('hidden');
             }
+
 
             // Mettre à jour l'état des boutons de navigation et la barre de progression
             updateNavigationButtons();
@@ -750,16 +882,27 @@
             // Stocker l'index D'ORIGINE de la réponse sélectionnée
             userAnswers[currentQuestionIndex] = originalSelectedIndex;
 
+            // Cacher l'indice avant le choix une fois qu'une réponse est sélectionnée
+            const preChoiceHintElement = document.getElementById('preChoiceHint');
+            if (preChoiceHintElement) {
+                preChoiceHintElement.classList.add('hidden');
+            }
+
             // Appliquer la logique de showRationale pour afficher les couleurs et justifications
-            showRationale(selectedElement, originalSelectedIndex);
+            showRationale(selectedElement, originalSelectedIndex, true); // Indiquer que c'est une nouvelle tentative pour le bonus
         }
 
         // Function to show rationale for all options and update the score
-        function showRationale(selectedElement, originalSelectedIndex) {
+        function showRationale(selectedElement, originalSelectedIndex, isNewAttempt) {
             const questionData = quizData.questions[currentQuestionIndex];
             const allOptionsElements = quizContainer.querySelectorAll('.answer-option');
             const rationaleContainer = document.getElementById('rationaleContainer');
+            const bonusMessageElement = document.getElementById('bonusMessage'); // Référence au nouveau div
+            const interactiveHintDisplay = document.getElementById('interactiveHintDisplay'); // Référence au nouveau div pour l'indice interactif
+
             rationaleContainer.innerHTML = '';
+            bonusMessageElement.classList.add('hidden'); // Cacher le message de bonus par défaut
+            interactiveHintDisplay.classList.add('hidden'); // Cacher l'indice interactif par défaut
 
             let isCurrentAnswerCorrect = false; // Pour savoir si la réponse sélectionnée est correcte
 
@@ -803,12 +946,36 @@
             });
 
             // Mettre à jour le score et le statut `answeredCorrectly`
-            if (userAnswers[currentQuestionIndex] !== null && answeredCorrectly[currentQuestionIndex] === false) {
+            if (isNewAttempt) { // Seulement si c'est une nouvelle tentative
                 if (isCurrentAnswerCorrect) {
-                    score++;
+                    score++; // Ajoute le point de la question
                     answeredCorrectly[currentQuestionIndex] = true;
+                    if (!firstAttemptBonusApplied[currentQuestionIndex]) {
+                        score += BONUS_POINTS; // Ajoute les points bonus
+                        firstAttemptBonusApplied[currentQuestionIndex] = true;
+                        bonusMessageElement.textContent = `Bien joué ! +${BONUS_POINTS} points bonus pour votre première tentative ! 🎉`;
+                        bonusMessageElement.classList.add('success');
+                        bonusMessageElement.classList.remove('hidden');
+                    }
+                } else {
+                    bonusMessageElement.textContent = `Pas de points bonus pour cette fois, mais continuez à apprendre ! 💡`;
+                    bonusMessageElement.classList.add('info');
+                    bonusMessageElement.classList.remove('hidden');
+
+                    // Afficher l'indice interactif si disponible et la réponse est incorrecte
+                    const interactiveHint = questionData.interactiveHint;
+                    if (interactiveHint && interactiveHint.text) {
+                        interactiveHintDisplay.textContent = interactiveHint.text;
+                        interactiveHintDisplay.classList.remove('hidden');
+                        interactiveHintDisplay.classList.add('fade-in'); // Ajouter la classe pour l'animation
+                        // Supprimer la classe d'animation après un court délai pour permettre de la re-déclencher
+                        setTimeout(() => {
+                            interactiveHintDisplay.classList.remove('fade-in');
+                        }, 500); // Correspond à la durée de l'animation
+                    }
                 }
             }
+
 
             updateLiveScoreDisplay();
             updateProgressBar(); // Mettre à jour la barre de progression après la sélection
@@ -864,93 +1031,67 @@
         function updateLiveScoreDisplay() {
             const totalQuestions = quizData.questions.length;
             const currentQuestionNumber = currentQuestionIndex + 1;
-            const answeredCount = userAnswers.filter(answer => answer !== null).length; // Compte les questions auxquelles une réponse a été donnée
-
-            let correctCount = 0;
-            let incorrectCount = 0;
-
-            for (let i = 0; i < answeredCount; i++) {
-                if (userAnswers[i] !== null) {
-                    const originalOptionIndex = userAnswers[i];
-                    const isCorrect = quizData.questions[i].answerOptions[originalOptionIndex].isCorrect;
-                    if (isCorrect) {
-                        correctCount++;
-                    } else {
-                        incorrectCount++;
-                    }
-                }
-            }
-            
-            let percentageCorrect = 0;
-            let percentageIncorrect = 0;
-
-            if (answeredCount > 0) {
-                percentageCorrect = ((correctCount / answeredCount) * 100).toFixed(0);
-                percentageIncorrect = ((incorrectCount / answeredCount) * 100).toFixed(0);
-            }
-
-            liveScoreDisplay.textContent = `Score : ${correctCount} / ${answeredCount} (${percentageCorrect}% de réussite, ${percentageIncorrect}% d'échecs) - Question ${currentQuestionNumber} / ${totalQuestions}`;
+            // Le score affiché est le score total (points de base + bonus)
+            liveScoreDisplay.textContent = `Score total : ${score} points - Question ${currentQuestionNumber} / ${totalQuestions}`;
         }
 
         // Fonction pour afficher les résultats finaux du quiz
         function showResults() {
             const totalQuestions = quizData.questions.length;
-            let finalCorrectCount = 0;
-            let finalIncorrectCount = 0;
-            let finalUnansweredCount = 0;
+            let finalCorrectCountQuestions = 0; // Nombre de questions répondues correctement
+            let finalIncorrectCountQuestions = 0; // Nombre de questions répondues incorrectement
+            let finalUnansweredCountQuestions = 0; // Nombre de questions non répondues
 
             for (let i = 0; i < totalQuestions; i++) {
                 if (userAnswers[i] !== null) {
                     const originalOptionIndex = userAnswers[i];
                     const isCorrect = quizData.questions[i].answerOptions[originalOptionIndex].isCorrect;
                     if (isCorrect) {
-                        finalCorrectCount++;
+                        finalCorrectCountQuestions++;
                     } else {
-                        finalIncorrectCount++;
+                        finalIncorrectCountQuestions++;
                     }
                 } else {
-                    finalUnansweredCount++;
+                    finalUnansweredCountQuestions++;
                 }
             }
 
-            const finalCorrectPercentage = ((finalCorrectCount / totalQuestions) * 100).toFixed(0);
-            const finalIncorrectPercentage = ((finalIncorrectCount / totalQuestions) * 100).toFixed(0);
-            const finalUnansweredPercentage = ((finalUnansweredCount / totalQuestions) * 100).toFixed(0);
-
+            const finalCorrectPercentageQuestions = ((finalCorrectCountQuestions / totalQuestions) * 100).toFixed(0);
+            
             let feedbackMessage = "";
             let celebrationContent = "";
             let shareFeedbackMessage = ""; // Specific message for sharing
 
-            if (finalCorrectPercentage <= 25) {
-                feedbackMessage = `Votre score de ${finalCorrectPercentage}% de réussite est un bon début. Il est temps de revoir vos cours ! Continuez votre apprentissage en pratiquant et en regardant les lives. C'est essentiel pour progresser. 📚💡`;
-                shareFeedbackMessage = `Mon résultat est de ${finalCorrectPercentage}% de réussite. Il est temps de revoir mes cours et de progresser !`;
-            } else if (finalCorrectPercentage <= 50) {
-                feedbackMessage = `Votre score de ${finalCorrectPercentage}% de réussite est encourageant. C'est bien, continuez ainsi ! Le prochain palier est 75%. Pour y arriver, continuez à progresser, suivez les lives, appliquez les concepts et faites de la veille sociale. 💪🚀`;
-                shareFeedbackMessage = `Mon score est de ${finalCorrectPercentage}% de réussite. C'est encourageant, mais je vise plus haut !`;
-            } else if (finalCorrectPercentage <= 75) {
-                feedbackMessage = `Félicitations pour votre score de ${finalCorrectPercentage}% de réussite ! Vos efforts portent leurs fruits. Vous pouvez continuer à vous performer et viser l'excellence. 🌟🎯`;
-                shareFeedbackMessage = `J'ai obtenu ${finalCorrectPercentage}% de réussite ! Très bon score, je continue de m'améliorer !`;
+            if (finalCorrectPercentageQuestions <= 25) {
+                feedbackMessage = `Votre score de ${finalCorrectPercentageQuestions}% de réussite est un bon début. Il est temps de revoir vos cours ! Continuez votre apprentissage en pratiquant et en regardant les lives. C'est essentiel pour progresser. 📚💡`;
+                shareFeedbackMessage = `Mon résultat est de ${finalCorrectPercentageQuestions}% de réussite. Il est temps de revoir mes cours et de progresser !`;
+            } else if (finalCorrectPercentageQuestions <= 50) {
+                feedbackMessage = `Votre score de ${finalCorrectPercentageQuestions}% de réussite est encourageant. C'est bien, continuez ainsi ! Le prochain palier est 75%. Pour y arriver, continuez à progresser, suivez les lives, appliquez les concepts et faites de la veille sociale. 💪🚀`;
+                shareFeedbackMessage = `Mon score est de ${finalCorrectPercentageQuestions}% de réussite. C'est encourageant, mais je vise plus haut !`;
+            } else if (finalCorrectPercentageQuestions <= 75) {
+                feedbackMessage = `Félicitations pour votre score de ${finalCorrectPercentageQuestions}% de réussite ! Vos efforts portent leurs fruits. Vous pouvez continuer à vous performer et viser l'excellence. 🌟🎯`;
+                shareFeedbackMessage = `J'ai obtenu ${finalCorrectPercentageQuestions}% de réussite ! Très bon score, je continue de m'améliorer !`;
             } else { // > 75% up to 100%
-                feedbackMessage = `Félicitations pour votre score de ${finalCorrectPercentage}% de réussite ! 🎉🔥 Vous maîtrisez le sujet ! N'oubliez pas que nous sommes une équipe, motivez la troupe et le transfert de compétences est important : aidez les autres personnes. 🏅🎓`;
+                feedbackMessage = `Félicitations pour votre score de ${finalCorrectPercentageQuestions}% de réussite ! 🎉🔥 Vous maîtrisez le sujet ! N'oubliez pas que nous sommes une équipe, motivez la troupe et le transfert de compétences est important : aidez les autres personnes. 🏅🎓`;
                 celebrationContent = `
                     <p class="text-2xl font-bold text-yellow-500 mt-4">🎉🔥 MÉDAILLE D'OR ! 🔥🎉</p>
                     <p class="text-xl font-semibold text-blue-600">Diplôme de Maîtrise du Règlement du Salaire !</p>
                 `;
-                shareFeedbackMessage = `J'ai atteint ${finalCorrectPercentage}% de réussite ! C'est la fête ! Je suis prêt à partager mes connaissances et à motiver la troupe !`;
+                shareFeedbackMessage = `J'ai atteint ${finalCorrectPercentageQuestions}% de réussite ! C'est la fête ! Je suis prêt à partager mes connaissances et à motiver la troupe !`;
             }
 
             // Get the quiz title from the <title> tag
             const quizTitle = document.title;
             // Construct the shareable message for Discord/WhatsApp
-            const shareMessage = `Voici les résultats obtenus lors de mon test quiz "${quizTitle}" ! J'ai eu ${finalCorrectPercentage}% de réussite. ${shareFeedbackMessage} Prêts à échanger sur Discord/WhatsApp pour progresser ensemble ?`;
+            const shareMessage = `Voici les résultats obtenus lors de mon test quiz "${quizTitle}" ! J'ai eu ${finalCorrectPercentageQuestions}% de réussite (Score total : ${score} points). ${shareFeedbackMessage} Prêts à échanger sur Discord/WhatsApp pour progresser ensemble ?`;
 
             quizContainer.innerHTML = `
-                <div class="score-display">Votre score final : ${finalCorrectCount} sur ${totalQuestions}</div>
-                <p class="text-lg text-gray-700 mb-4">Un aperçu de votre performance :</p>
+                <div class="score-display">Votre score final : ${score} points sur un maximum de ${totalQuestions * (1 + BONUS_POINTS)} (base + bonus)</div>
+                <p class="text-lg text-gray-700 mb-4">Questions correctement répondues : ${finalCorrectCountQuestions} sur ${totalQuestions} (${finalCorrectPercentageQuestions}% de réussite)</p>
 
                 <div class="progress-bar final-results-chart-container">
-                    <div class="progress-section correct-section" style="width: ${finalCorrectPercentage}%;">
-                        ${finalCorrectPercentage > 0 ? `${finalCorrectPercentage}%` : ''}
+                    <div class="progress-section correct-section" style="width: ${finalCorrectPercentageQuestions}%;">
+                        ${finalCorrectPercentageQuestions > 0 ? `${finalCorrectPercentageQuestions}%` : ''}
                     </div>
                 </div>
 
@@ -961,10 +1102,10 @@
                     <textarea id="shareableResult" class="w-full p-2 border rounded-md text-gray-700 bg-gray-50 mb-4" rows="4" readonly>${shareMessage}</textarea>
                     <button id="copyResultButton" class="button bg-green-500 hover:bg-green-600 mb-4">Copier le message de partage</button>
                     <p class="text-md text-gray-600 mb-2">Rejoignez la discussion sur :</p>
-                    <a href="https://discord.com/channels/1390693097033175060/1391491121061826582" target="_blank" class="inline-block mt-2 bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300">
+                    <a href="https://discord.gg/cBnBkGDFgk" target="_blank" class="inline-block mt-2 bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300">
                         Discord ✨・espace-papotage
                     </a>
-                    <a href="https://chat.whatsapp.com/FuBgQZStV0r2dgIDxJe2g9" target="_blank" class="inline-block mt-2 ml-2 bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300">
+                    <a href="https://chat.whatsapp.com/EtV0ux5ipAG5JDhopzo0ut" target="_blank" class="inline-block mt-2 ml-2 bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300">
                         WhatsApp 🔥 | Payroll Boss Elite Club 👑
                     </a>
                 </div>
@@ -1018,6 +1159,10 @@
             score = 0; // Réinitialiser le score
             userAnswers.fill(null); // Effacer les réponses de l'utilisateur
             answeredCorrectly.fill(false); // Réinitialiser le suivi de la justesse
+            firstAttemptBonusApplied.fill(false); // Réinitialiser le suivi du bonus
+            // Cacher les messages de bonus et d'indice interactif au redémarrage
+            document.getElementById('bonusMessage').classList.add('hidden');
+            document.getElementById('interactiveHintDisplay').classList.add('hidden');
             // Afficher les boutons de navigation et cacher le bouton de redémarrage
             prevButton.classList.remove('hidden');
             nextButton.classList.remove('hidden');
@@ -1031,3 +1176,4 @@
     </script>
 </body>
 </html>
+�
